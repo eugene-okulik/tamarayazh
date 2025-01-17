@@ -8,7 +8,7 @@ my_dict = {
 print(my_dict["tuple"][-1])
 my_dict["list"].append('six')
 my_dict["list"].pop(1)
-my_dict["dict"]["i'm a tuple"] = "new"
+my_dict["dict"][('i am a tuple',)] = "new"
 my_dict["dict"].pop("age")
 my_dict["set"].add(3000)
 my_dict["set"].discard("text")
