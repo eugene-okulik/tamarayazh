@@ -1,6 +1,7 @@
 def add_numbers(string):
     return int(string[string.index(':') + 1:]) + 10
 
+
 def find_numbers():
     text = [
         "результат операции: 42",
@@ -11,4 +12,5 @@ def find_numbers():
 
     for string in text:
         print(add_numbers(string))
+
 find_numbers()
