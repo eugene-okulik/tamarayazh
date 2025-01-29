@@ -13,5 +13,5 @@ def find_numbers():
     for string in text:
         print(add_numbers(string))
 
-find_numbers()
 
+find_numbers()
