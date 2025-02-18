@@ -1,4 +1,6 @@
 import random
+
+
 class Flower:
     def __init__(self, name, color, freshness, stem_length, lifetime, price):
         self.name = name
@@ -17,7 +19,7 @@ class Flower:
 
 class Rose(Flower):
     def __init__(self, name, color, freshness, stem_length):
-        super().__init__(name, color, freshness, stem_length, lifetime=random.randint(5,12), price=3)
+        super().__init__(name, color, freshness, stem_length, lifetime=random.randint(5, 12), price=3)
 
 
 class Tulip(Flower):
