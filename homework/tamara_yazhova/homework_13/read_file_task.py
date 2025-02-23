@@ -4,7 +4,7 @@ import datetime
 
 base_path = os.path.dirname(__file__)
 homework_path = os.path.dirname(os.path.dirname(base_path))
-eugene_file_path = os.path.join(homework_path, 'eugene_okulik', 'hw_13', 'data.txt' )
+eugene_file_path = os.path.join(homework_path, 'eugene_okulik', 'hw_13', 'data.txt')
 
 
 def read_file(filepath):
