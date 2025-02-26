@@ -1,0 +1,48 @@
+insert into students (name, second_name) values ('Sancho', 'Pancho');
+insert into books (title, taken_by_student_id) values ('Kolobok', 355);
+insert into books (title, taken_by_student_id) values ('English for beginners', 355);
+insert into books (title, taken_by_student_id) values ('The little prince', 355);
+insert into `groups` (title, start_date, end_date) values ('super tester', 'abr 2024', 'sep 2024');
+update students set group_id = 190 where name = 'Sancho' and second_name = 'Pancho';
+insert into subjets (title) values ('Spanish level 2');
+insert into subjets (title) values ('Biologi. Level 3');
+insert into subjets (title) values ('Geometry');
+insert into lessons (title, subject_id) values('Spanish - group 1', 284);
+insert into lessons (title, subject_id) values('Spanish - group 2', 284);
+insert into lessons (title, subject_id) values('Biology. Insects', 285);
+insert into lessons (title, subject_id) values('Biology. Anatomy', 285);
+insert into lessons (title, subject_id) values('Geometry. Beginners', 286);
+insert into lessons (title, subject_id) values('Geometry. Adv', 286);
+insert into marks (`value`, lesson_id, student_id) values (8, 645, 355);
+insert into marks (`value`, lesson_id, student_id) values (7, 646, 355);
+insert into marks (`value`, lesson_id, student_id) values (7, 647, 355);
+insert into marks (`value`, lesson_id, student_id) values (6, 648, 355);
+insert into marks (`value`, lesson_id, student_id) values (5, 649, 355);
+insert into marks (`value`, lesson_id, student_id) values (7, 650, 355);
+
+-- Получите информацию из базы данных:
+-- Все оценки студента
+select * from marks where student_id = 355;
+
+-- Все книги, которые находятся у студента
+select * from books where taken_by_student_id = 355;
+
+-- Для вашего студента выведите всё, что о нем есть в базе: группа, книги, оценки с названиями занятий
+ и предметов (всё одним запросом с использованием Join)
+
+select
+    students.id as student_id,
+    students.name,
+    students.second_name,
+    `groups`.title as group_title,
+    books.title as book_title,
+    marks.value as mark,
+    lessons.title as lesson_title,
+    subjets.title as subject_title
+from students
+left join `groups` on students.group_id = `groups`.id
+left join books on students.id = books.taken_by_student_id
+left join marks on students.id = marks.student_id
+left join lessons on marks.lesson_id = lessons.id
+left join subjets on lessons.subject_id = subjets.id
+where students.id = 355;
