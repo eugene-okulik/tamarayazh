@@ -2,11 +2,11 @@ import mysql.connector as mysql
 
 
 db = mysql.connect(
-    username = 'st-onl',
-    password = 'AVNS_tegPDkI5BlB2lW5eASC',
-    host = 'db-mysql-fra1-09136-do-user-7651996-0.b.db.ondigitalocean.com',
-    port = 25060,
-    database = 'st-onl'
+    username='st-onl',
+    password='AVNS_tegPDkI5BlB2lW5eASC',
+    host='db-mysql-fra1-09136-do-user-7651996-0.b.db.ondigitalocean.com',
+    port=25060,
+    database='st-onl'
 )
 cursor = db.cursor()
 
@@ -18,13 +18,13 @@ student_id = cursor.lastrowid
 print("Id студента:", student_id)
 
 query_group = "INSERT INTO `groups` (title, start_date, end_date) VALUES (%s, %s, %s)"
-group_value =  ('super tester', 'abr 2024', 'sep 2024')
+group_value = ('super tester', 'abr 2024', 'sep 2024')
 cursor.execute(query_group, group_value)
 db.commit()
 group_id = cursor.lastrowid
 print("ID группы:", group_id)
 
-student_in_group= "UPDATE students SET group_id = %s WHERE id = %s"
+student_in_group = "UPDATE students SET group_id = %s WHERE id = %s"
 value_for_group = (group_id, student_id)
 cursor.execute(student_in_group, value_for_group)
 db.commit()
@@ -68,8 +68,8 @@ print("Добавленные уроки:", lesson_ids)
 
 query_marks = "INSERT INTO marks (`value`, lesson_id, student_id) VALUES (%s, %s, %s)"
 marks_values = [
-    (8, lesson_ids[0], student_id), (7, lesson_ids[1], student_id ),
-    (7, lesson_ids[2], student_id ), (6, lesson_ids[3], student_id ),
+    (8, lesson_ids[0], student_id), (7, lesson_ids[1], student_id),
+    (7, lesson_ids[2], student_id), (6, lesson_ids[3], student_id),
     (5, lesson_ids[4], student_id), (7, lesson_ids[5], student_id)
 ]
 cursor.executemany(query_marks, marks_values)
@@ -84,8 +84,8 @@ print("Книги у студента:", cursor.fetchall())
 query_all = '''
 SELECT students.id as student_id, students.name, students.second_name, `groups`.title as group_title,
     books.title as book_title, marks.value as mark, lessons.title as lesson_title,
-    subjets.title as subject_title 
-FROM students
+   subjets.title as subject_title
+   FROM students
 LEFT JOIN `groups` ON students.group_id = `groups`.id
 LEFT JOIN books ON students.id = books.taken_by_student_id
 LEFT JOIN marks ON students.id = marks.student_id
