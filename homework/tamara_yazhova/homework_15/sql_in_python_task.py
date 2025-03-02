@@ -43,10 +43,11 @@ subject_value = [('Spanish level 2',), ('Biology. Level 3',), ('Geometry',)]
 cursor.executemany(query_subject, subject_value)
 db.commit()
 
-cursor.execute('''SELECT id, title
-FROM subjets
-WHERE title IN (%s, %s, %s)''',
-('Spanish level 2', 'Biology. Level 3', 'Geometry'))
+cursor.execute(
+    '''SELECT id, title
+            FROM subjets
+            WHERE title IN (%s, %s, %s)''', ('Spanish level 2', 'Biology. Level 3', 'Geometry')
+)
 subjects = cursor.fetchall()
 for subject in subjects:
     print(f"ID предметов: {subject[0]}, Название: {subject[1]}")
