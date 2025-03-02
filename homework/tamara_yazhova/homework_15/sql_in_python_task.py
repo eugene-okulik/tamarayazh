@@ -38,34 +38,33 @@ books_values = [
 cursor.executemany(query_books, books_values)
 db.commit()
 
-query_subject = "INSERT INTO subjets (title) VALUES (%s)"
-subject_value = [('Spanish level 2',), ('Biology. Level 3',), ('Geometry',)]
-cursor.executemany(query_subject, subject_value)
-db.commit()
-
-cursor.execute(
-    '''SELECT id, title
-            FROM subjets
-            WHERE title IN (%s, %s, %s)''', ('Spanish level 2', 'Biology. Level 3', 'Geometry')
-)
-subjects = cursor.fetchall()
+subjects = ['Spanish level 2', 'Biology. Level 3', 'Geometry']
+subject_ids = []
 for subject in subjects:
-    print(f"ID предметов: {subject[0]}, Название: {subject[1]}")
+    cursor.execute("SELECT id FROM subjets WHERE title = %s", (subject,))
+    result = cursor.fetchone()
+    if result:
+        subject_ids.append(result[0])
+    else:
+        cursor.execute("INSERT INTO subjets (title) VALUES (%s)", (subject,))
+        db.commit()
+        subject_ids.append(cursor.lastrowid)
+print(subject_ids)
 
 lesson_values = [
-    ('Spanish - group 1', subjects[0][0]),
-    ('Spanish - group 2', subjects[0][0]),
-    ('Biology. Insects', subjects[1][0]),
-    ('Biology. Anatomy', subjects[1][0]),
-    ('Geometry. Beginners', subjects[2][0]),
-    ('Geometry. Adv', subjects[2][0])
+    ('Spanish - group 1', subject_ids[0]),
+    ('Spanish - group 2', subject_ids[0]),
+    ('Biology. Insects', subject_ids[1]),
+    ('Biology. Anatomy', subject_ids[1]),
+    ('Geometry. Beginners', subject_ids[2]),
+    ('Geometry. Adv', subject_ids[2])
 ]
 lesson_ids = []
 for lesson, subject_id in lesson_values:
     cursor.execute("INSERT INTO lessons (title, subject_id) VALUES (%s, %s)", (lesson, subject_id))
     db.commit()
     lesson_ids.append(cursor.lastrowid)
-print("Добавленные уроки:", lesson_ids)
+print("ID уроков:", lesson_ids)
 
 query_marks = "INSERT INTO marks (`value`, lesson_id, student_id) VALUES (%s, %s, %s)"
 marks_values = [
