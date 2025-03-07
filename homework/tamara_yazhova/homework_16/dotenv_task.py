@@ -26,9 +26,9 @@ with open(eugene_file_path, newline='') as csv_file:
     data = []
     for row in file_data:
         query = """
-        SELECT students.id as student_id, students.name, students.second_name, 
-        `groups`.title as group_title, 
-        books.title as book_title, marks.value as mark, lessons.title as lesson_title, 
+        SELECT students.id as student_id, students.name, students.second_name,
+        `groups`.title as group_title,
+        books.title as book_title, marks.value as mark, lessons.title as lesson_title,
         subjets.title as subject_title
         FROM students
         LEFT JOIN `groups` ON students.group_id = `groups`.id
@@ -36,12 +36,12 @@ with open(eugene_file_path, newline='') as csv_file:
         LEFT JOIN marks ON students.id = marks.student_id
         LEFT JOIN lessons ON marks.lesson_id = lessons.id
         LEFT JOIN subjets ON lessons.subject_id = subjets.id
-        WHERE students.name = %s 
-        AND students.second_name = %s 
-        AND `groups`.title = %s 
-        AND books.title = %s 
-        AND subjets.title = %s 
-        AND lessons.title = %s 
+        WHERE students.name = %s
+        AND students.second_name = %s
+        AND `groups`.title = %s
+        AND books.title = %s
+        AND subjets.title = %s
+        AND lessons.title = %s
         AND marks.value = %s
                 """
         columns = (
