@@ -3,6 +3,7 @@ import requests
 
 HEADERS = {"Content-type": "application/json"}
 
+
 def get_all_posts():
     response = requests.get('http://167.172.172.115:52353/object')
     assert response.status_code == 200, f"Failed to get posts: {response.status_code}, {response.text}"
@@ -13,9 +14,9 @@ def create_post():
     body = {
         "name": "Second object",
         "data": {
-        "color": "red",
-        "size": "small"
-    },
+            "color": "red",
+            "size": "small"
+        },
     }
     response = requests.post('http://167.172.172.115:52353/object', json=body, headers=HEADERS)
     assert response.status_code == 200, f"Failed to create post: {response.status_code}, {response.text}"
@@ -50,7 +51,7 @@ def update_post_patch(post_id):
         headers=HEADERS
     ).json()
     assert response['name'] == 'Pulp Fiction-UPD', f"Failed to update post: {response}"
-    print(f"Success! Post updated by patch.")
+    print("Success! Post updated by patch.")
 
 
 def delete_post(post_id):
