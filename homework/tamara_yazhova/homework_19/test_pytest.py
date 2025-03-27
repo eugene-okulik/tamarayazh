@@ -34,8 +34,6 @@ def create_object():
     ("Object_2", {"color": "white", "size": "small"}),
     ("Object_3", {"color": "black", "size": "big"}),
 ])
-
-
 @pytest.mark.critical
 def test_create_post(name, data, add_messages_for_all, add_message_for_each):
     body = {"name": name, "data": data}
