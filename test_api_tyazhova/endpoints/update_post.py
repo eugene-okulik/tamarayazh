@@ -10,7 +10,8 @@ class UpdatePost(Endpoint):
     @allure.step("Update post with PUT")
     def update_post_put(self, post_id, body):
         self.response = requests.put(
-        f'{self.url}/{post_id}', json=body, headers=self.headers)
+            f'{self.url}/{post_id}', json=body, headers=self.headers
+        )
         self.json = self.response.json()
 
     @allure.step("Update post with PATCH")

@@ -15,27 +15,33 @@ def add_messages_for_all():
     yield
     print("\nTesting completed")
 
+
 @pytest.fixture()
 def add_message_for_each():
     print("\nbefore test")
     yield
     print("\nafter test")
 
+
 @pytest.fixture()
 def create_post_endpoint():
     return CreatePost()
+
 
 @pytest.fixture()
 def update_post_endpoint():
     return UpdatePost(url)
 
+
 @pytest.fixture()
 def delete_post_endpoint():
     return DeletePost()
 
+
 @pytest.fixture()
 def get_posts_endpoint():
     return GetPosts()
+
 
 @pytest.fixture()
 def create_object(create_post_endpoint, delete_post_endpoint):
