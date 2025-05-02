@@ -12,6 +12,7 @@ def driver():
     chrome_driver.maximize_window()
     yield chrome_driver
 
+
 def test_submit_language(driver):
     driver.get("https://www.qa-practice.com/elements/select/single_select")
     select_language = Select(driver.find_element(By.NAME, "choose_language"))
