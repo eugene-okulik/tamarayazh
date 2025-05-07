@@ -11,7 +11,7 @@ import pytest
 def driver():
     chrome_driver = webdriver.Chrome()
     chrome_driver.maximize_window()
-    yield  chrome_driver
+    yield chrome_driver
 
 
 def test_product_is_in_the_cart(driver):
