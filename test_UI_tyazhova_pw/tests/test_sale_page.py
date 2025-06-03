@@ -1,6 +1,3 @@
-from test_UI_tyazhova_pw.conftest import sale_page
-
-
 def test_navigate_to_women_deals_link(sale_page):
     sale_page.open_page()
     sale_page.click_to_women_deals_link()

@@ -1,6 +1,3 @@
-from test_UI_tyazhova_pw.conftest import eco_friendly_page
-
-
 def test_eco_friendly_page_title_is_correct(eco_friendly_page):
     eco_friendly_page.open_page()
     assert eco_friendly_page.get_title() == "Eco Friendly"
